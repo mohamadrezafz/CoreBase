@@ -8,7 +8,7 @@ namespace CoreBase.Logic
     {
 
     }
-   public class BusinessBase : IBaseBusiness
+   public class BaseBusiness : IBaseBusiness
     {
 
 
