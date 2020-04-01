@@ -7,23 +7,23 @@ using System.Text;
 namespace CoreBase.Data
 {
 
-    public interface IBaseUnitOfWork<out TContext>
-     where TContext : DbContext, new()
+    public interface IBaseUnitOfWork<TContext>
+     where TContext : DbContext
     {
         TContext Context { get; }
         void CreateTransaction();
         void Commit();
         void Rollback();
         void Save();
+        void Dispose();
     }
-    public class BaseUnitOfWork<TContext> : IBaseUnitOfWork<TContext>, IDisposable
+    public abstract class BaseUnitOfWork<TContext> : IBaseUnitOfWork<TContext>, IDisposable
     where TContext : DbContext, new()
     {
         private readonly TContext _context;
         private bool _disposed;
         private string _errorMessage = string.Empty;
         private DbContextTransaction _objTran;
-        private Dictionary<string, object> _repositories;
 
         public BaseUnitOfWork()
         {
@@ -75,18 +75,5 @@ namespace CoreBase.Data
                     _context.Dispose();
             _disposed = true;
         }
-        //public GenericRepository<T> GenericRepository<T>() where T : class
-        //{
-        //    if (_repositories == null)
-        //        _repositories = new Dictionary<string, object>();
-        //    var type = typeof(T).Name;
-        //    if (!_repositories.ContainsKey(type))
-        //    {
-        //        var repositoryType = typeof(GenericRepository<T>);
-        //        var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _context);
-        //        _repositories.Add(type, repositoryInstance);
-        //    }
-        //    return (GenericRepository<T>)_repositories[type];
-        //}
     }
 }

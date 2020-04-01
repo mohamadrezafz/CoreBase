@@ -93,10 +93,10 @@ namespace CoreBase.Common.RestfulHelper
                 return new ServiceResult<TResult>
                 {
                     Data = default,
-                    HttpStatus =  HttpStatusCode.RequestTimeout,
+                    HttpStatus = HttpStatusCode.RequestTimeout,
                     ReasonPhrase = "",
-                    Error = ex.Message ,
-                    
+                    Error = ex.Message,
+
                 };
             }
             catch (Exception ex)
@@ -113,7 +113,7 @@ namespace CoreBase.Common.RestfulHelper
                     Error = ex.Message
                 };
             }
-           
+
         }
 
         public static async Task<ServiceResult<TResult>> GetAsync<TResult>(
@@ -211,11 +211,11 @@ namespace CoreBase.Common.RestfulHelper
                     Data = default,
                     HttpStatus = HttpStatusCode.InternalServerError,
                     ReasonPhrase = "",
-                    Error = ex.Message ,
-                    
+                    Error = ex.Message,
+
                 };
             }
-           
+
 
         }
 
@@ -299,12 +299,12 @@ namespace CoreBase.Common.RestfulHelper
                 return new ServiceResult
                 {
                     Data = default,
-                    Error = ex ,
+                    Error = ex,
                     StatusCode = HttpStatusCode.InternalServerError,
                     ReasonPhrase = "",
                 };
             }
-          
+
         }
 
         public static async Task<ServiceResult> GetAsync(
