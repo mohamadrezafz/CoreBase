@@ -43,10 +43,7 @@ namespace CoreBase.Common.RestfulHelper
                 }
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
-                client.BaseAddress.PathAndQuery,
+                client.BaseAddress.Scheme + client.BaseAddress.Host + param.ToString() + client.BaseAddress.PathAndQuery,
                 "",
                 JsonConvert.SerializeObject(headers)
                 );
@@ -57,8 +54,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host + 
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode,
                 result.SerializeToJson()
@@ -147,10 +144,7 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
-                client.BaseAddress.PathAndQuery,
+                client.BaseAddress.Scheme + client.BaseAddress.Host + param.ToString() + client.BaseAddress.PathAndQuery,
                 "",
                 JsonConvert.SerializeObject(headers)
                 );
@@ -160,8 +154,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host +
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode,
                 result.SerializeToJson()
@@ -249,11 +243,7 @@ namespace CoreBase.Common.RestfulHelper
                 }
 
                 Log.Information
-                (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
-                client.BaseAddress.PathAndQuery,
+                (LogTemplates.Request + client.BaseAddress.Scheme + client.BaseAddress.Host + param.ToString() + client.BaseAddress.PathAndQuery,
                 "",
                 JsonConvert.SerializeObject(headers)
                 );
@@ -263,8 +253,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host +
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode
                 );
@@ -338,10 +328,10 @@ namespace CoreBase.Common.RestfulHelper
                 }
 
                 Log.Information
-                (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                (LogTemplates.Request ,
+                client.BaseAddress.Scheme +
+                client.BaseAddress.Host +
+                param.ToString() + 
                 client.BaseAddress.PathAndQuery,
                 "",
                 JsonConvert.SerializeObject(headers)
@@ -352,8 +342,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme +
+                client.BaseAddress.Host +
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode,
                 result.SerializeToJson()
@@ -451,9 +441,9 @@ namespace CoreBase.Common.RestfulHelper
                     }
                     Log.Information
                     (LogTemplates.Request,
-                    client.BaseAddress.Scheme,
-                    client.BaseAddress.Host,
-                    param.ToString(),
+                    client.BaseAddress.Scheme +
+                    client.BaseAddress.Host +
+                    param.ToString() +
                     client.BaseAddress.PathAndQuery,
                     content,
                     JsonConvert.SerializeObject(headers)
@@ -464,8 +454,8 @@ namespace CoreBase.Common.RestfulHelper
 
                     Log.Information
                     (LogTemplates.Response,
-                    client.BaseAddress.Scheme,
-                    client.BaseAddress.Host,
+                    client.BaseAddress.Scheme +
+                    client.BaseAddress.Host +
                     client.BaseAddress.PathAndQuery,
                     response.StatusCode,
                     result.SerializeToJson()
@@ -572,9 +562,9 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host + 
+                param.ToString() +
                 client.BaseAddress.PathAndQuery,
                 content,
                 JsonConvert.SerializeObject(headers)
@@ -585,8 +575,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme +
+                client.BaseAddress.Host +
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode,
                 result.SerializeToJson()
@@ -695,9 +685,9 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host +
+                param.ToString() +
                 client.BaseAddress.PathAndQuery,
                 content,
                 JsonConvert.SerializeObject(headers)
@@ -708,8 +698,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme +
+                client.BaseAddress.Host +
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode,
                 result.SerializeToJson()
@@ -808,9 +798,9 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host + 
+                param.ToString() + 
                 client.BaseAddress.PathAndQuery,
                 content,
                 JsonConvert.SerializeObject(headers)
@@ -823,8 +813,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Response,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
+                client.BaseAddress.Scheme +
+                client.BaseAddress.Host +
                 client.BaseAddress.PathAndQuery,
                 response.StatusCode,
                 result.SerializeToJson()
@@ -924,9 +914,9 @@ namespace CoreBase.Common.RestfulHelper
 
                     Log.Information
                     (LogTemplates.Request,
-                    client.BaseAddress.Scheme,
-                    client.BaseAddress.Host,
-                    param.ToString(),
+                    client.BaseAddress.Scheme +
+                    client.BaseAddress.Host +
+                    param.ToString() +
                     client.BaseAddress.PathAndQuery,
                     content,
                     JsonConvert.SerializeObject(headers)
@@ -937,8 +927,8 @@ namespace CoreBase.Common.RestfulHelper
 
                     Log.Information
                      (LogTemplates.Response,
-                     client.BaseAddress.Scheme,
-                     client.BaseAddress.Host,
+                     client.BaseAddress.Scheme + 
+                     client.BaseAddress.Host +
                      client.BaseAddress.PathAndQuery,
                      response.StatusCode,
                      result.SerializeToJson()
@@ -1047,9 +1037,9 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                client.BaseAddress.Scheme  +
+                client.BaseAddress.Host + 
+                param.ToString() + 
                 client.BaseAddress.PathAndQuery,
                 content,
                 JsonConvert.SerializeObject(headers)
@@ -1063,8 +1053,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                  (LogTemplates.Response,
-                 client.BaseAddress.Scheme,
-                 client.BaseAddress.Host,
+                 client.BaseAddress.Scheme + 
+                 client.BaseAddress.Host +
                  client.BaseAddress.PathAndQuery,
                  response.StatusCode,
                  result.SerializeToJson()
@@ -1171,9 +1161,9 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host + 
+                param.ToString() + 
                 client.BaseAddress.PathAndQuery,
                 content,
                 JsonConvert.SerializeObject(headers)
@@ -1184,8 +1174,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                  (LogTemplates.Response,
-                 client.BaseAddress.Scheme,
-                 client.BaseAddress.Host,
+                 client.BaseAddress.Scheme +
+                 client.BaseAddress.Host +
                  client.BaseAddress.PathAndQuery,
                  response.StatusCode,
                  result.SerializeToJson()
@@ -1282,9 +1272,9 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                 (LogTemplates.Request,
-                client.BaseAddress.Scheme,
-                client.BaseAddress.Host,
-                param.ToString(),
+                client.BaseAddress.Scheme + 
+                client.BaseAddress.Host + 
+                param.ToString() + 
                 client.BaseAddress.PathAndQuery,
                 content,
                 JsonConvert.SerializeObject(headers)
@@ -1296,8 +1286,8 @@ namespace CoreBase.Common.RestfulHelper
 
                 Log.Information
                  (LogTemplates.Response,
-                 client.BaseAddress.Scheme,
-                 client.BaseAddress.Host,
+                 client.BaseAddress.Scheme +
+                 client.BaseAddress.Host +
                  client.BaseAddress.PathAndQuery,
                  response.StatusCode,
                  result.SerializeToJson()

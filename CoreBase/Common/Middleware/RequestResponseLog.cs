@@ -46,9 +46,9 @@ namespace CoreBase.Common.Middleware
 
             Log.Information
                 (LogTemplates.Response,
-                request.Scheme.ToString(),
-                request.Host.ToString(),
-                request.Path.ToString(),
+                request.Scheme.ToString() + 
+                request.Host.ToString() + 
+                request.Path.ToString() + 
                 request.QueryString.ToString(),
                 response.StatusCode,
                 ReadStreamInChunks(newResponseBody)
@@ -62,10 +62,7 @@ namespace CoreBase.Common.Middleware
 
             Log.Information
                 (LogTemplates.Request,
-                request.Scheme.ToString(),
-                request.Host.ToString(),
-                request.Path.ToString(),
-                request.QueryString.ToString(),
+                request.Scheme.ToString() + request.Host.ToString() + request.Path.ToString() + request.QueryString.ToString(),
                 await GetRequestBody(request),
                 request.Headers
                 );
