@@ -22,7 +22,7 @@ namespace CoreBase.Data
         IEnumerable<TEntity> GetAll();
 
     }
-    public abstract class BaseRepository<TContext, TEntity> : IBaseRepository<TContext, TEntity>, IDisposable where TEntity : class where TContext : DbContext
+    public class BaseRepository<TContext, TEntity> : IBaseRepository<TContext, TEntity>, IDisposable where TEntity : class where TContext : DbContext
     {
         private IDbSet<TEntity> _entities;
         private string _errorMessage = string.Empty;
