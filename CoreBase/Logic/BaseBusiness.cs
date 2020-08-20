@@ -1,59 +1,68 @@
-﻿using CoreBase.Data;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Text;
+﻿//using CoreBase.Data;
+//using Microsoft.Extensions.Configuration;
+//using System;
+//using System.Collections.Generic;
+//using System.Data.Entity;
+//using System.Text;
 
-namespace CoreBase.Logic
-{
-    public interface IBaseBusiness<TContext>  where TContext : DbContext , IDisposable
-    {
+//namespace CoreBase.Logic
+//{
+//    public interface IBaseBusiness<TContext> where TContext : DbContext, IDisposable
+//    {
 
-    }
-   public abstract class BaseBusiness<TContext> where TContext : DbContext, IDisposable
-    {
-        protected bool IsInExternalUnitOfWork { get; }
-        private bool _disposed;
-        private IBaseUnitOfWork<TContext> _mUnitOfWork;
+//    }
+//    public class BaseBusiness<TContext> where TContext : DbContext, IDisposable, IBaseBusiness<TContext>
+//    {
+//        protected bool IsInExternalUnitOfWork { get; }
+//        private bool _disposed;
+//        private IBaseUnitOfWork<TContext> _mUnitOfWork;
+//        protected readonly IConfiguration configuration;
 
-        protected IBaseUnitOfWork<TContext> UnitOfWork
-        {
-            get { return _mUnitOfWork; }
-            set { _mUnitOfWork = value; }
-        }
 
-        protected BaseBusiness(IBaseUnitOfWork<TContext> unitOfWork)
-        {
-            IsInExternalUnitOfWork = true;
-            UnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        }
+//        protected IBaseUnitOfWork<TContext> UnitOfWork
+//        {
+//            get { return _mUnitOfWork; }
+//            set { _mUnitOfWork = value; }
+//        }
+//        protected BaseBusiness(IConfiguration configuration)
+//        {
+//            this.configuration = configuration;
+//            IsInExternalUnitOfWork = false;
+//        }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+//        protected BaseBusiness(IBaseUnitOfWork<TContext> unitOfWork, IConfiguration configuration) : this(configuration)
+//        {
+//            this.configuration = configuration;
+//            IsInExternalUnitOfWork = true;
+//            UnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+//        }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed)
-            {
-                return;
-            }
+//        public void Dispose()
+//        {
+//            Dispose(true);
+//            GC.SuppressFinalize(this);
+//        }
 
-            if (disposing)
-            {
-                if (false == IsInExternalUnitOfWork)
-                {
-                    if (_mUnitOfWork != null)
-                    {
-                        _mUnitOfWork.Dispose();
-                        _mUnitOfWork = null;
-                    }
-                }
-            }
+//        protected virtual void Dispose(bool disposing)
+//        {
+//            if (_disposed)
+//            {
+//                return;
+//            }
 
-            _disposed = true;
-        }
-    }
-}
+//            if (disposing)
+//            {
+//                if (false == IsInExternalUnitOfWork)
+//                {
+//                    if (_mUnitOfWork != null)
+//                    {
+//                        _mUnitOfWork.Dispose();
+//                        _mUnitOfWork = null;
+//                    }
+//                }
+//            }
+
+//            _disposed = true;
+//        }
+//    }
+//}

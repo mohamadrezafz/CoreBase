@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using CoreBase.Common.Filter;
 
 namespace CoreBase.Api
 {
+    [ExceptionActionFilter]
+    [ApiController]
     public class BaseApiController : ControllerBase
     {
         protected ObjectResult StatusCode(HttpStatusCode statusCode, object value) =>

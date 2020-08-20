@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.Extensions.Localization.Internal;
+using ServiceStack.Text;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace CoreBase.Data
 {
@@ -21,6 +24,11 @@ namespace CoreBase.Data
         void Dispose();
         IEnumerable<TEntity> GetAll();
 
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task InsertAsync(TEntity entity);
+        Task BulkInsertAsync(IEnumerable<TEntity> entities);
+        Task UpdateAsync(TEntity entity);
+        Task DeleteAsync(TEntity entity);
     }
     public class BaseRepository<TContext, TEntity> : IBaseRepository<TContext, TEntity>, IDisposable where TEntity : class where TContext : DbContext
     {
@@ -52,6 +60,10 @@ namespace CoreBase.Data
         {
             return Entities.ToList();
         }
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await Entities.ToListAsync();
+        }
         public virtual TEntity GetById(object id)
         {
             return Entities.Find(id);
@@ -62,12 +74,30 @@ namespace CoreBase.Data
             return Entities.Where(predicate);
         }
 
+
+        public virtual async Task InsertAsync(TEntity entity)
+        {
+            try
+            {
+
+                Entities.Add(entity);
+                await Context.SaveChangesAsync();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                        _errorMessage += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage) + Environment.NewLine;
+                throw new Exception(_errorMessage, dbEx);
+            }
+        }
         public virtual void Insert(TEntity entity)
         {
             try
             {
 
                 Entities.Add(entity);
+                Context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -102,12 +132,57 @@ namespace CoreBase.Data
                 throw new Exception(_errorMessage, dbEx);
             }
         }
+
+        public virtual async Task BulkInsertAsync(IEnumerable<TEntity> entities)
+        {
+            try
+            {
+                if (entities == null)
+                {
+                    throw new ArgumentNullException("entities");
+                }
+                Context.Configuration.AutoDetectChangesEnabled = false;
+                Context.Set<TEntity>().AddRange(entities);
+              await Context.SaveChangesAsync();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        _errorMessage += string.Format("Property: {0} Error: {1}", validationError.PropertyName,
+                        validationError.ErrorMessage) + Environment.NewLine;
+                    }
+                }
+                throw new Exception(_errorMessage, dbEx);
+            }
+        }
+
         public virtual void Update(TEntity entity)
         {
             try
             {
 
                 SetEntryModified(entity);
+                Context.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                        _errorMessage += Environment.NewLine + string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                throw new Exception(_errorMessage, dbEx);
+            }
+        }
+
+        public virtual async Task UpdateAsync(TEntity entity)
+        {
+            try
+            {
+
+                SetEntryModified(entity);
+                await Context.SaveChangesAsync();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -123,6 +198,24 @@ namespace CoreBase.Data
             {
 
                 Entities.Remove(entity);
+                Context.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                        _errorMessage += Environment.NewLine + string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                throw new Exception(_errorMessage, dbEx);
+            }
+        }
+
+        public virtual async Task DeleteAsync(TEntity entity)
+        {
+            try
+            {
+
+                Entities.Remove(entity);
+              await  Context.SaveChangesAsync();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -146,17 +239,13 @@ namespace CoreBase.Data
             Delete(entityToDelete);
         }
 
-        public virtual void SetEntryModified(TEntity entity)
+        private  void SetEntryModified(TEntity entity)
         {
             Context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            return await Entities.ToListAsync();
-        }
 
-        
+
     }
 
 
