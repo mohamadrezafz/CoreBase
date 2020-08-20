@@ -4,9 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CoreBase</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>RezaFz</Authors>
     <Company>MicroFz</Company>
+    <PackageIcon>icon_CoreBase.png</PackageIcon>
+    <!--<PackageIcon>icon_CoreBase.png</PackageIcon>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +27,14 @@
     <PackageReference Include="ServiceStack.Text" Version="5.7.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.7.0" />
+    <!--<None Include="images\icon.png" Pack="true" PackagePath=""/>-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Image\icon_CoreBase.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
